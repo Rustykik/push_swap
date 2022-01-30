@@ -6,7 +6,7 @@
 /*   By: rusty <rusty@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/23 09:51:08 by rusty             #+#    #+#             */
-/*   Updated: 2022/01/30 07:08:27 by rusty            ###   ########.fr       */
+/*   Updated: 2022/01/30 07:22:07 by rusty            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,7 @@ void	get_mid(t_ps *ps)
 	ps->mid = nums[ps->size_a / 2];
 	ps->max = nums[ps->size_a - 1];
 	ps->min = nums[0];
+	free(nums);
 }
 
 t_ps	*input_ps(int argc, char **argv)
