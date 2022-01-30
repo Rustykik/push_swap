@@ -6,7 +6,7 @@
 /*   By: rusty <rusty@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/23 06:43:23 by rusty             #+#    #+#             */
-/*   Updated: 2022/01/26 16:53:29 by rusty            ###   ########.fr       */
+/*   Updated: 2022/01/30 06:25:07 by rusty            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,13 @@ static void	check_duplicate(char **args, int free_args)
 	int	j;
 
 	i = 0;
+	if (!free_args)
+		++i;
 	while (args[++i])
 	{
 		j = -1;
+		if (!free_args)
+			++j;
 		while (++j < i)
 		{
 			if (ft_atoi(args[j]) == ft_atoi(args[i]))

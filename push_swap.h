@@ -6,7 +6,7 @@
 /*   By: rusty <rusty@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/23 08:24:06 by rusty             #+#    #+#             */
-/*   Updated: 2022/01/29 19:56:24 by rusty            ###   ########.fr       */
+/*   Updated: 2022/01/30 03:18:34 by rusty            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,9 @@ struct s_ps
 	t_clist		**a_stack;
 	t_clist		**b_stack;
 	t_list		*actions;
-	int			last_action;
-	int			cur_action;
+	int			mid;
+	int			max;
+	int			min;
 };
 
 // enum	act

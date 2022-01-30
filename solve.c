@@ -6,66 +6,60 @@
 /*   By: rusty <rusty@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/27 13:50:24 by rusty             #+#    #+#             */
-/*   Updated: 2022/01/29 23:37:58 by rusty            ###   ########.fr       */
+/*   Updated: 2022/01/30 06:09:30 by rusty            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	find_minmaxmid(long long *min, long long *max, long long *mid, t_ps *ps)
-{
-	int		i;
-	int		tm;
-	t_clist	*stack;
+// void	find_minmaxmid(long long *min, long long *max, long long *mid, t_ps *ps)
+// {
+// 	int		i;
+// 	int		tm;
+// 	t_clist	*stack;
 
-	i = -1;
-	stack = *ps->a_stack;
-	*min = stack->val;
-	*max = stack->val;
-	*mid = stack->val;
-	tm = ps->size_a / 2 + (ps->size_a % 2 * 1);
-	// printf("timeless loop? %i\n", tm);
-	while (++i < ps->size_a)
-	{
-	// printf("%lli min, %lli max, %lli mid compare to %lli\n", *min, *max, *mid, stack->val);
+// 	i = -1;
+// 	stack = *ps->a_stack;
+// 	*min = stack->val;
+// 	*max = stack->val;
+// 	*mid = stack->val;
+// 	tm = ps->size_a / 2 + (ps->size_a % 2 * 1);
+// 	// printf("timeless loop? %i\n", tm);
+// 	while (++i < ps->size_a)
+// 	{
+// 	// printf("%lli min, %lli max, %lli mid compare to %lli\n", *min, *max, *mid, stack->val);
 
-		if (*min > stack->val)
-			*min = stack->val;
-		if (*max < stack->val)
-			*max = stack->val;
-		if (i == tm - 1)
-			*mid = stack->val;
-		stack = stack->next;
-	}
-	// printf("%lli min, %lli max, %lli mid\n", *min, *max, *mid);
-	// printf("timeless loop? - no\n");
-}
+// 		if (*min > stack->val)
+// 			*min = stack->val;
+// 		if (*max < stack->val)
+// 			*max = stack->val;
+// 		if (i == tm - 1)
+// 			*mid = stack->val;
+// 		stack = stack->next;
+// 	}
+// 	// printf("%lli min, %lli max, %lli mid\n", *min, *max, *mid);
+// 	// printf("timeless loop? - no\n");
+// }
 
 void	get_sorting_scores(t_clist *stack, long long size)
 {
-	int			back;
 	int			i;
-	long long	sze;
 	t_clist		*stack_tmp;
 
 	i = -1;
 	stack_tmp = stack;
-	while (++i < size)
+	while (++i <= size / 2)
 	{
-		back = 2;
-		sze = size;
-		if (i <= (size / 2 + (size % 2) * 1)) // maybe -1 
-		{
-			stack_tmp->elem_score = i;
-			stack_tmp->rot = 1;
-		}
-		else
-		{
-			while (sze-- != i)
-				++back;
-			stack_tmp->elem_score = back;
-			stack_tmp->rot = -1;
-		}
+		stack_tmp->elem_score = i;
+		stack_tmp->rot = 1;
+		stack_tmp = stack_tmp->next;
+	}
+	if (size % 2 == 0)
+		--i;
+	while (--i > 0)
+	{
+		stack_tmp->elem_score = i;
+		stack_tmp->rot = -1;
 		stack_tmp = stack_tmp->next;
 	}
 }
@@ -91,7 +85,7 @@ void	find_util(t_ps *ps, int *actions)
 	long long	data;
 
 	i = -1;
-
+	data = 0;
 	while (++i < ps->size_a)
 	{
 		data = (*ps->a_stack)->val;
@@ -100,19 +94,20 @@ void	find_util(t_ps *ps, int *actions)
 			*actions += 1;
 			if ((*ps->b_stack)->val < (*ps->a_stack)->next->val)
 				break ;
-			ps->a_stack = &(*ps->a_stack)->next;
+			*ps->a_stack = (*ps->a_stack)->next;
 		}
 		else
 			break ;
 	}
-	if (smallest_found(ps, data, i))
+	if (smallest_found(ps, data, i) == 1)
 	{
 		// find_smallest(ps, i, )
 		while (i < ps->size_a)
 		{
-			if ((*ps->b_stack)->val < data && (*ps->a_stack)->val > (*ps->b_stack)->val)
+			if ((*ps->a_stack)->val < data && (*ps->a_stack)->val > (*ps->b_stack)->val)
 				break ;
 			*actions += 1;
+			*ps->a_stack = (*ps->a_stack)->next;
 			++i;
 		}
 	}
@@ -127,8 +122,8 @@ int	find_insert_place(t_ps *ps, int actions, t_act *act)
 	count_actions = 0;
 	find_util(ps, &count_actions);
 	if ((*ps->a_stack)->rot == -1)
-		count_actions = (*ps->a_stack)->elem_score - count_actions;
-	if (actions == -1 || (count_actions + act->count_b) < actions)
+		count_actions = ps->size_a - count_actions;
+	if (actions == -1 || (count_actions + (*ps->b_stack)->elem_score) < actions)
 	{
 		act->dest_a = (*ps->a_stack)->rot;
 		act->dest_b = (*ps->b_stack)->rot;
@@ -144,21 +139,21 @@ int	find_insert_place(t_ps *ps, int actions, t_act *act)
 void	minimum_insertion_steps(t_ps *ps, t_act *act)
 {
 	int		actions;
-	t_clist	**def_a;
-	t_clist	**def_b;
+	t_clist	*def_a;
+	t_clist	*def_b;
 	int		i;
 
 	i = -1;
 	actions = -1;
-	def_a = ps->a_stack;
-	def_b = ps->b_stack;
+	def_a = *ps->a_stack;
+	def_b = *ps->b_stack;
 	while (++i < ps->size_b)
 	{
 		actions = find_insert_place(ps, actions, act);
-		ps->a_stack = def_a;
-		ps->b_stack = &(*ps->b_stack)->next;
+		*ps->a_stack = def_a;
+		*ps->b_stack = (*ps->b_stack)->next;
 	}
-	ps->b_stack = def_b;
+	*ps->b_stack = def_b;
 }
 
 void	execute_instruction(t_ps *ps, t_act *act)
@@ -248,48 +243,46 @@ void	sort_3(t_ps *ps, long long max)
 
 void	full_sort(long long min, long long max, long long mid, t_ps *ps)
 {
-	while (ps->size_a > 3)
+	while (ps->size_a > 2)
 	{
 	// printf("%lli min, %lli max, %lli mid\n", min, max, mid);
 
 		// ft_printf("%i  ps cur val %i \n", ps->size_a, (*ps->a_stack)->val);
-		if ((*ps->a_stack)->val != max && (*ps->a_stack)->val != min \
-		&& (*ps->a_stack)->val != mid)
+		if ((*ps->a_stack)->val != max && (*ps->a_stack)->val != min)
 		{
 			pb(ps);
-			if (((*ps->a_stack)->val == max && (*ps->a_stack)->val == min \
-		&& (*ps->a_stack)->val == mid) && (*ps->b_stack)->val > mid)
-				rr(ps);
-			else
+			if ((*ps->b_stack)->val > mid)
 				rb(ps);
 		}
 		else //(((*ps->a_stack)->val == max && (*ps->a_stack)->val == min && (*ps->a_stack)->val == mid))
 			ra(ps);
 		// sleep(7);
 	}
-	sort_3(ps, max);
-	// pa(ps); // ?
+	// sort_3(ps, max);
+	if ((*ps->a_stack)->val < (*ps->a_stack)->next->val)
+		sa(ps);
+	pa(ps); // ?
 	sort_b2a(ps, min); // , max, mid
 }
 
 void	sort(t_ps *ps)
 {
-	long long	max;
-	long long	min;
-	long long	mid;
+	// long long	max;
+	// long long	min;
+	// long long	mid;
 
 	if (ps->size_a == 2)
 	{
 		sa(ps);
 		return ;
 	}
-	find_minmaxmid(&min, &max, &mid, ps);
+	// find_minmaxmid(&min, &max, &mid, ps);
 	// write(1, "finished\n", 8);
 	// ft_printf("\n%i \n", ps->size_a);
 	if (ps->size_a == 3)
-		sort_3(ps, max);
+		sort_3(ps, ps->max);
 	else
-		full_sort(min, max, mid, ps);
+		full_sort(ps->min, ps->max, ps->mid, ps);
 }
 
 int	check_sorted(t_clist *stack, int size)
