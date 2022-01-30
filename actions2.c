@@ -6,7 +6,7 @@
 /*   By: rusty <rusty@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/27 02:12:55 by rusty             #+#    #+#             */
-/*   Updated: 2022/01/30 07:04:04 by rusty            ###   ########.fr       */
+/*   Updated: 2022/01/30 09:09:43 by rusty            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,17 +59,4 @@ void	rrb(t_ps *ps)
 	*ps->b_stack = (*ps->b_stack)->prev;
 	}
 	write(1, "rrb\n", 4);
-}
-
-void	rrr(t_ps *ps)
-{
-	if (*ps->a_stack)
-	{
-		*ps->a_stack = (*ps->a_stack)->prev;
-	}
-	if (*ps->b_stack)
-	{
-		*ps->b_stack = (*ps->b_stack)->prev;
-	}
-	write(1, "rrr\n", 4);
 }

@@ -6,7 +6,7 @@
 #    By: rusty <rusty@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/04 12:56:00 by ubeetroo          #+#    #+#              #
-#    Updated: 2022/01/29 15:20:41 by rusty            ###   ########.fr        #
+#    Updated: 2022/01/30 09:14:11 by rusty            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,11 +28,16 @@ PS_SRCS =  ft_clist_add_back \
 	errors \
 	check_input \
 	input \
+	input_utils \
 	utils \
 	solve \
+	solve_utils \
+	find \
 	actions \
 	actions2 \
-	main
+	actions3 \
+	exec \
+	main 
 			
 
 # PS_OBJ_FOLDER = ./obj/

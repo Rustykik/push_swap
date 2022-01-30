@@ -1,23 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   stack.c                                            :+:      :+:    :+:   */
+/*   actions3.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rusty <rusty@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/23 11:00:38 by rusty             #+#    #+#             */
-/*   Updated: 2022/01/24 08:40:47 by rusty            ###   ########.fr       */
+/*   Created: 2022/01/30 09:10:10 by rusty             #+#    #+#             */
+/*   Updated: 2022/01/30 09:10:25 by rusty            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-t_ps	*init_ps(void)
-{
-	t_ps	*ret;
+#include "push_swap.h"
 
-	ret = (t_stack *)ft_calloc(sizeof(t_stack), 1);
-	if (!ret)
-		return (NULL);
-	ret->next = NULL;
-	ret->prev = NULL;
-	return (ret);
+void	rrr(t_ps *ps)
+{
+	if (*ps->a_stack)
+	{
+		*ps->a_stack = (*ps->a_stack)->prev;
+	}
+	if (*ps->b_stack)
+	{
+		*ps->b_stack = (*ps->b_stack)->prev;
+	}
+	write(1, "rrr\n", 4);
 }

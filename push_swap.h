@@ -6,7 +6,7 @@
 /*   By: rusty <rusty@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/23 08:24:06 by rusty             #+#    #+#             */
-/*   Updated: 2022/01/30 07:08:55 by rusty            ###   ########.fr       */
+/*   Updated: 2022/01/30 09:13:39 by rusty            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,42 +45,58 @@ struct s_actions
 	int	dest_b;
 };
 
-/*stack.c*/
+/*solve_utils.c*/
+void		rotate_a_min2head(t_ps *ps, long long min);
+
+/*exec.c*/
+void		execute_instruction(t_ps *ps, t_act *act);
+
+/*find.c*/
+void		get_sorting_scores(t_clist *stack, long long size);
+void		minimum_insertion_steps(t_ps *ps, t_act *act);
+int			find_insert_place(t_ps *ps, int actions, t_act *act);
 
 /*input.c*/
-t_ps	*input_ps(int argc, char **argv);
+t_ps		*input_ps(int argc, char **argv);
+long long	get_score(int i, int size);
+
+/*input_utils.c*/
+int			check_sorted(t_clist *stack, int size);
 
 /*utils.c*/
-void	free_split(char **split);
-void	init_stacks(t_ps *ps);
-void	free_stacks(t_ps *ps);
-void	free_ps(t_ps *ps);
+void		free_split(char **split);
+void		init_stacks(t_ps *ps);
+void		free_stacks(t_ps *ps);
+void		free_ps(t_ps *ps);
 
 /*errors.c*/
-void	error_exit_free(t_ps *ps);
-void	error_wrong_args(void);
+void		error_exit_free(t_ps *ps);
+void		error_wrong_args(void);
 
 /*check_input.c*/
-int		check_input(int argc, char **argv);
+int			check_input(int argc, char **argv);
+void		get_mid(t_ps *ps);
+void		second_input(t_ps *ps, int argc, char **argv);
+void		first_input(t_ps *ps, char *input);
 
 /*solve.c*/
-void	solve(t_ps *ps);
+void		solve(t_ps *ps);
 
 /*actions*/
 
 // void	check_action(t_ps *ps);
 
-void	pa(t_ps *ps);
-void	pb(t_ps *ps);
+void		pa(t_ps *ps);
+void		pb(t_ps *ps);
 
-void	sa(t_ps *ps);
-void	sb(t_ps *ps);
+void		sa(t_ps *ps);
+void		sb(t_ps *ps);
 
-void	ra(t_ps *ps);
-void	rb(t_ps *ps);
-void	rr(t_ps *ps);
-void	rra(t_ps *ps);
-void	rrb(t_ps *ps);
-void	rrr(t_ps *ps);
+void		ra(t_ps *ps);
+void		rb(t_ps *ps);
+void		rr(t_ps *ps);
+void		rra(t_ps *ps);
+void		rrb(t_ps *ps);
+void		rrr(t_ps *ps);
 
 #endif
