@@ -6,7 +6,7 @@
 /*   By: rusty <rusty@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/27 13:50:24 by rusty             #+#    #+#             */
-/*   Updated: 2022/01/30 09:00:46 by rusty            ###   ########.fr       */
+/*   Updated: 2022/01/30 12:09:11 by rusty            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,8 @@ void	sort(t_ps *ps)
 	}
 	if (ps->size_a == 3)
 		sort_3(ps, ps->max);
+	else if (ps->size_a <= 5)
+		sort_5(ps);
 	else
 		full_sort(ps->min, ps->max, ps->mid, ps);
 }
