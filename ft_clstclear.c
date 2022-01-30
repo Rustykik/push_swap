@@ -6,7 +6,7 @@
 /*   By: rusty <rusty@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/26 07:45:42 by rusty             #+#    #+#             */
-/*   Updated: 2022/01/30 05:52:18 by rusty            ###   ########.fr       */
+/*   Updated: 2022/01/30 07:05:25 by rusty            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,9 @@ void	ft_clstclear(t_clist **head)
 		return ;
 	to_del = *head;
 	to_del->prev->next = NULL;
-	// ft_printf("%p check next addr\n", check->next);
-	// check = (*head);
-	// while (check)
-	// 	check= check->next;
 	while (to_del)
 	{
 		curr_lst = to_del->next;
-		// ft_printf("%p is about to del\n", to_del);
 		ft_clistdellone(&to_del);
 		to_del = curr_lst;
 	}

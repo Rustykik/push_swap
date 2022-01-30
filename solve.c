@@ -6,7 +6,7 @@
 /*   By: rusty <rusty@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/27 13:50:24 by rusty             #+#    #+#             */
-/*   Updated: 2022/01/30 06:09:30 by rusty            ###   ########.fr       */
+/*   Updated: 2022/01/30 07:11:05 by rusty            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,19 @@ int	smallest_found(t_ps *ps, long long data, int i)
 	return (0);
 }
 
+void	find_smallest(t_ps *ps, int i, int *actions, long long data)
+{
+	while (i < ps->size_a)
+	{
+		if ((*ps->a_stack)->val < data && \
+		(*ps->a_stack)->val > (*ps->b_stack)->val)
+			break ;
+		*actions += 1;
+		*ps->a_stack = (*ps->a_stack)->next;
+		++i;
+	}
+}
+
 void	find_util(t_ps *ps, int *actions)
 {
 	int			i;
@@ -100,18 +113,7 @@ void	find_util(t_ps *ps, int *actions)
 			break ;
 	}
 	if (smallest_found(ps, data, i) == 1)
-	{
-		// find_smallest(ps, i, )
-		while (i < ps->size_a)
-		{
-			if ((*ps->a_stack)->val < data && (*ps->a_stack)->val > (*ps->b_stack)->val)
-				break ;
-			*actions += 1;
-			*ps->a_stack = (*ps->a_stack)->next;
-			++i;
-		}
-	}
-	// ft_printf("we stock here\n");
+		find_smallest(ps, i, actions, data);
 }
 
 int	find_insert_place(t_ps *ps, int actions, t_act *act)
@@ -156,7 +158,7 @@ void	minimum_insertion_steps(t_ps *ps, t_act *act)
 	*ps->b_stack = def_b;
 }
 
-void	execute_instruction(t_ps *ps, t_act *act)
+void	exec_rr_rra(t_ps *ps, t_act *act)
 {
 	while (act->count_a && act->count_b && act->dest_a == act->dest_b)
 	{
@@ -167,6 +169,11 @@ void	execute_instruction(t_ps *ps, t_act *act)
 		--act->count_a;
 		--act->count_b;
 	}
+}
+
+void	execute_instruction(t_ps *ps, t_act *act)
+{
+	exec_rr_rra(ps, act);
 	while (act->count_a > 0)
 	{
 		if (act->dest_a == 1)
@@ -195,8 +202,6 @@ void	rotate_a_min2head(t_ps *ps, long long min)
 	tmp = *ps->a_stack;
 	while (++i < ps->size_a && tmp->val != min)
 		tmp = tmp->next;
-	// ft_printf("min is on %d", i);
-	// sleep(10);
 	if (i > ps->size_a / 2)
 		while ((*ps->a_stack)->val != min)
 			rra(ps);
@@ -205,7 +210,7 @@ void	rotate_a_min2head(t_ps *ps, long long min)
 			ra(ps);
 }
 
-void	sort_b2a(t_ps *ps, long long min) // , long long max, long long mid
+void	sort_b2a(t_ps *ps, long long min)
 {
 	t_act	*act;
 
@@ -221,13 +226,9 @@ void	sort_b2a(t_ps *ps, long long min) // , long long max, long long mid
 		get_sorting_scores(*ps->a_stack, ps->size_a);
 		get_sorting_scores(*ps->b_stack, ps->size_b);
 		minimum_insertion_steps(ps, act);
-		// ft_printf("we getted out of thet sht \n");
-		// rb(ps);
-		// ft_printf("%d %d %d %d", act->count_a, act->count_b, act->dest_a, act->dest_b);
-		// sleep(10);
 		execute_instruction(ps, act);
 	}
-/**/rotate_a_min2head(ps, min);
+	rotate_a_min2head(ps, min);
 	free(act);
 }
 
@@ -245,40 +246,28 @@ void	full_sort(long long min, long long max, long long mid, t_ps *ps)
 {
 	while (ps->size_a > 2)
 	{
-	// printf("%lli min, %lli max, %lli mid\n", min, max, mid);
-
-		// ft_printf("%i  ps cur val %i \n", ps->size_a, (*ps->a_stack)->val);
 		if ((*ps->a_stack)->val != max && (*ps->a_stack)->val != min)
 		{
 			pb(ps);
 			if ((*ps->b_stack)->val > mid)
 				rb(ps);
 		}
-		else //(((*ps->a_stack)->val == max && (*ps->a_stack)->val == min && (*ps->a_stack)->val == mid))
+		else
 			ra(ps);
-		// sleep(7);
 	}
-	// sort_3(ps, max);
 	if ((*ps->a_stack)->val < (*ps->a_stack)->next->val)
 		sa(ps);
-	pa(ps); // ?
-	sort_b2a(ps, min); // , max, mid
+	pa(ps);
+	sort_b2a(ps, min);
 }
 
 void	sort(t_ps *ps)
 {
-	// long long	max;
-	// long long	min;
-	// long long	mid;
-
 	if (ps->size_a == 2)
 	{
 		sa(ps);
 		return ;
 	}
-	// find_minmaxmid(&min, &max, &mid, ps);
-	// write(1, "finished\n", 8);
-	// ft_printf("\n%i \n", ps->size_a);
 	if (ps->size_a == 3)
 		sort_3(ps, ps->max);
 	else
@@ -305,7 +294,6 @@ void	solve(t_ps *ps)
 {
 	if (check_sorted(*ps->a_stack, ps->size_a))
 		return ;
-	// ft_printf("not sorted\n");
 	sort(ps);
 }
 

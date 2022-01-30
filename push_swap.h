@@ -6,7 +6,7 @@
 /*   By: rusty <rusty@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/23 08:24:06 by rusty             #+#    #+#             */
-/*   Updated: 2022/01/30 03:18:34 by rusty            ###   ########.fr       */
+/*   Updated: 2022/01/30 07:08:55 by rusty            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,21 +37,6 @@ struct s_ps
 	int			min;
 };
 
-// enum	act
-// {
-// 	SA = 1;
-// 	SB = 2;
-// 	SS = 3;
-// 	PA = 4;
-// 	PB = 5;
-// 	RA = 6;
-// 	RB = 7;
-// 	RR
-// 	RRA
-// 	RRB
-// 	RRR
-// }
-
 struct s_actions
 {
 	int	count_a;
@@ -61,7 +46,6 @@ struct s_actions
 };
 
 /*stack.c*/
-
 
 /*input.c*/
 t_ps	*input_ps(int argc, char **argv);
@@ -84,7 +68,7 @@ void	solve(t_ps *ps);
 
 /*actions*/
 
-void	check_action(t_ps *ps);
+// void	check_action(t_ps *ps);
 
 void	pa(t_ps *ps);
 void	pb(t_ps *ps);
@@ -98,6 +82,5 @@ void	rr(t_ps *ps);
 void	rra(t_ps *ps);
 void	rrb(t_ps *ps);
 void	rrr(t_ps *ps);
-
 
 #endif

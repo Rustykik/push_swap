@@ -6,7 +6,7 @@
 /*   By: rusty <rusty@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/27 01:54:34 by rusty             #+#    #+#             */
-/*   Updated: 2022/01/30 04:10:29 by rusty            ###   ########.fr       */
+/*   Updated: 2022/01/30 07:12:01 by rusty            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ void	sa(t_ps *ps)
 		(*ps->a_stack)->next->val = tmp;
 	}
 	write(1, "sa\n", 3);
-	//check_action(ps);
 }
 
 void	sb(t_ps *ps)
@@ -60,73 +59,62 @@ void	sb(t_ps *ps)
 		(*ps->b_stack)->next->val = tmp;
 	}
 	write(1, "sb\n", 3);
-	//check_action(ps);
-
 }
 
 void	pa(t_ps *ps)
 {
+	t_clist	*tmp;
+
 	if (ps->size_b > 0)
 	{
 		++ps->size_a;
 		--ps->size_b;
 		if (ps->size_b == 0)
 		{
-			ft_clist_add_front(ps->a_stack, ft_clistnew((*ps->b_stack)->val, 0));
+			ft_clist_add_front(ps->a_stack, \
+			ft_clistnew((*ps->b_stack)->val, 0));
 			ft_clistdellone(ps->b_stack);
 			*ps->b_stack = NULL;
 		}
 		else
 		{
-			ft_clist_add_front(ps->a_stack, ft_clistnew((*ps->b_stack)->val, 0));
-			t_clist *tmp = (*ps->b_stack);
-			t_clist *tmp_next = (*ps->b_stack)->next;
-			t_clist *tmp_prev = (*ps->b_stack)->prev;
-			tmp_prev->next = tmp_next;
-			tmp_next->prev = tmp_prev;
-			(*ps->b_stack) = tmp_next;
-
-			// (*ps->b_stack)->prev->next = (*ps->b_stack)->next;
-			// (*ps->b_stack)->next->prev = (*ps->b_stack)->prev;
-			// (*ps->b_stack) = (*ps->b_stack)->next;
+			tmp = (*ps->b_stack);
+			ft_clist_add_front(ps->a_stack, ft_clistnew(tmp->val, 0));
+			(*ps->b_stack)->prev->next = (*ps->b_stack)->next;
+			(*ps->b_stack)->next->prev = (*ps->b_stack)->prev;
+			(*ps->b_stack) = (*ps->b_stack)->next;
 			ft_clistdellone(&tmp);
 			tmp = NULL;
 		}
 	}
 	write(1, "pa\n", 3);
-	//check_action(ps);
-
 }
 
 void	pb(t_ps *ps)
 {
+	t_clist	*tmp;
+
 	if (ps->size_a > 0)
 	{
 		++ps->size_b;
 		--ps->size_a;
 		if (ps->size_a == 0)
 		{
-			ft_clist_add_front(ps->b_stack, ft_clistnew((*ps->a_stack)->val, 0));
+			ft_clist_add_front(ps->b_stack, \
+			ft_clistnew((*ps->a_stack)->val, 0));
 			ft_clistdellone(ps->a_stack);
 			*ps->a_stack = NULL;
 		}
 		else
 		{
-			ft_clist_add_front(ps->b_stack, ft_clistnew((*ps->a_stack)->val, 0));
-			t_clist *tmp = (*ps->a_stack);
-			t_clist *tmp_next = (*ps->a_stack)->next;
-			t_clist *tmp_prev = (*ps->a_stack)->prev;
-			tmp_prev->next = tmp_next;
-			tmp_next->prev = tmp_prev;
-			(*ps->a_stack) = tmp_next;
-
-			// (*ps->a_stack)->prev->next = (*ps->a_stack)->next;
-			// (*ps->a_stack)->next->prev = (*ps->a_stack)->prev;
-			// (*ps->a_stack) = (*ps->a_stack)->next;
+			tmp = (*ps->a_stack);
+			ft_clist_add_front(ps->b_stack, ft_clistnew(tmp->val, 0));
+			(*ps->a_stack)->prev->next = (*ps->a_stack)->next;
+			(*ps->a_stack)->next->prev = (*ps->a_stack)->prev;
+			(*ps->a_stack) = (*ps->a_stack)->next;
 			ft_clistdellone(&tmp);
 			tmp = NULL;
 		}
 	}
 	write(1, "pb\n", 3);
-	//check_action(ps);
 }

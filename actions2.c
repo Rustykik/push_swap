@@ -6,7 +6,7 @@
 /*   By: rusty <rusty@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/27 02:12:55 by rusty             #+#    #+#             */
-/*   Updated: 2022/01/30 06:00:27 by rusty            ###   ########.fr       */
+/*   Updated: 2022/01/30 07:04:04 by rusty            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ void	ra(t_ps *ps)
 	{
 		*ps->a_stack = (*ps->a_stack)->next;
 		write(1, "ra\n", 3);
-	//check_action(ps);
 	}
 }
 
@@ -28,7 +27,6 @@ void	rb(t_ps *ps)
 	{
 		*ps->b_stack = (*ps->b_stack)->next;
 		write(1, "rb\n", 3);
-	//check_action(ps);
 	}
 }
 
@@ -43,9 +41,7 @@ void	rr(t_ps *ps)
 		*ps->b_stack = (*ps->b_stack)->next;
 	}
 	write(1, "rr\n", 3);
-	//check_action(ps);
 }
-
 
 void	rra(t_ps *ps)
 {
@@ -54,7 +50,6 @@ void	rra(t_ps *ps)
 		*ps->a_stack = (*ps->a_stack)->prev;
 	}
 	write(1, "rra\n", 4);
-	//check_action(ps);
 }
 
 void	rrb(t_ps *ps)
@@ -64,7 +59,6 @@ void	rrb(t_ps *ps)
 	*ps->b_stack = (*ps->b_stack)->prev;
 	}
 	write(1, "rrb\n", 4);
-	//check_action(ps);
 }
 
 void	rrr(t_ps *ps)
@@ -78,5 +72,4 @@ void	rrr(t_ps *ps)
 		*ps->b_stack = (*ps->b_stack)->prev;
 	}
 	write(1, "rrr\n", 4);
-	//check_action(ps);
 }

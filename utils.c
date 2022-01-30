@@ -6,7 +6,7 @@
 /*   By: rusty <rusty@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/23 07:28:31 by rusty             #+#    #+#             */
-/*   Updated: 2022/01/30 04:16:30 by rusty            ###   ########.fr       */
+/*   Updated: 2022/01/30 07:04:49 by rusty            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ void	init_stacks(t_ps *ps)
 {
 	ps->a_stack = (t_clist **)ft_calloc(sizeof(t_clist *), 1);
 	ps->b_stack = (t_clist **)ft_calloc(sizeof(t_clist *), 1);
-		// ft_printf("\n%p !!!!!!!!\n", ps->a_stack);
 	if (!ps->a_stack || !ps->b_stack)
 		error_exit_free(ps);
 }
@@ -35,10 +34,7 @@ void	free_stacks(t_ps *ps)
 {
 	if (ps->a_stack)
 	{
-		// ft_printf("\n%p !!!!!!!!\n", ps->a_stack);
-	// ft_printf("free b\n");
 		ft_clstclear(ps->a_stack);
-		// ft_printf("\n%p !!!!!!!!\n", ps->a_stack);
 		free(ps->a_stack);
 		ps->a_stack = NULL;
 	}

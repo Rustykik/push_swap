@@ -6,7 +6,7 @@
 /*   By: rusty <rusty@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/23 09:51:08 by rusty             #+#    #+#             */
-/*   Updated: 2022/01/30 04:12:44 by rusty            ###   ########.fr       */
+/*   Updated: 2022/01/30 07:08:27 by rusty            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,8 @@ void	second_input(t_ps *ps, int argc, char **argv)
 	int	i;
 
 	i = 0;
-	// ft_printf("%s\n", argv[1]);
 	while (argv[++i])
 	{
-	// ft_printf("%s\n", argv[i]);
 		ft_clist_add_back(ps->a_stack, \
 ft_clistnew(ft_atoi(argv[i]), get_score(i, argc - 1)));
 	}
@@ -88,12 +86,13 @@ void	insert_sort(int *arr, int size)
 
 void	get_mid(t_ps *ps)
 {
-	int	i;
-	int	*nums;
+	int		i;
+	int		*nums;
 	t_clist	*tmp;
 
 	nums = malloc(sizeof(int) * ps->size_a);
-	// nums[ps->size_a];
+	if (!nums)
+		error_exit_free(ps);
 	i = -1;
 	tmp = *ps->a_stack;
 	while (++i < ps->size_a)
@@ -105,7 +104,6 @@ void	get_mid(t_ps *ps)
 	ps->mid = nums[ps->size_a / 2];
 	ps->max = nums[ps->size_a - 1];
 	ps->min = nums[0];
-	// ft_printf("%d min %d max %d mid\n", ps->min, ps->max, ps->mid);
 }
 
 t_ps	*input_ps(int argc, char **argv)
