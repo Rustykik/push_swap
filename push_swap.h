@@ -6,7 +6,7 @@
 /*   By: rusty <rusty@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/23 08:24:06 by rusty             #+#    #+#             */
-/*   Updated: 2022/01/30 11:57:40 by rusty            ###   ########.fr       */
+/*   Updated: 2022/01/31 13:38:00 by rusty            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,13 @@ struct s_actions
 };
 
 /*solve.c*/
-void		solve(t_ps *ps);
 void		sort_3(t_ps *ps, long long max);
+void		sort(t_ps *ps);
 
 /*solve_utils.c*/
 void		rotate_a_min2head(t_ps *ps, long long min);
 void		sort_5(t_ps *ps);
+long long	stack_min(t_clist *stack, int size);
 
 /*exec.c*/
 void		execute_instruction(t_ps *ps, t_act *act);
@@ -83,7 +84,6 @@ int			check_input(int argc, char **argv);
 void		get_mid(t_ps *ps);
 void		second_input(t_ps *ps, int argc, char **argv);
 void		first_input(t_ps *ps, char *input);
-
 
 /*actions*/
 

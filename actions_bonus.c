@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   actions.c                                          :+:      :+:    :+:   */
+/*   actions_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rusty <rusty@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/27 01:54:34 by rusty             #+#    #+#             */
-/*   Updated: 2022/01/31 12:16:55 by rusty            ###   ########.fr       */
+/*   Updated: 2022/01/31 14:27:41 by rusty            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ void	sa(t_ps *ps)
 		tmp = (*ps->a_stack)->val;
 		(*ps->a_stack)->val = (*ps->a_stack)->next->val;
 		(*ps->a_stack)->next->val = tmp;
-		write(1, "sa\n", 3);
 	}
 }
 
@@ -57,7 +56,6 @@ void	sb(t_ps *ps)
 		tmp = (*ps->b_stack)->val;
 		(*ps->b_stack)->val = (*ps->b_stack)->next->val;
 		(*ps->b_stack)->next->val = tmp;
-		write(1, "sb\n", 3);
 	}
 }
 
@@ -86,7 +84,6 @@ void	pa(t_ps *ps)
 			ft_clistdellone(&tmp);
 			tmp = NULL;
 		}
-		write(1, "pa\n", 3);
 	}
 }
 
@@ -115,6 +112,5 @@ void	pb(t_ps *ps)
 			ft_clistdellone(&tmp);
 			tmp = NULL;
 		}
-		write(1, "pb\n", 3);
 	}
 }

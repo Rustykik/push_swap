@@ -6,7 +6,7 @@
 /*   By: rusty <rusty@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/30 08:59:21 by rusty             #+#    #+#             */
-/*   Updated: 2022/01/30 12:49:11 by rusty            ###   ########.fr       */
+/*   Updated: 2022/01/31 13:35:46 by rusty            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,25 +49,20 @@ void	rotate_a_min2head(t_ps *ps, long long min)
 			ra(ps);
 }
 
-void	sort_5(t_ps *ps)
+long long	stack_min(t_clist *stack, int size)
 {
-	while (ps->size_b < 2)
+	int			i;
+	long long	min;
+	t_clist		*tmp;
+
+	tmp = stack;
+	min = tmp->val;
+	i = -1;
+	while (++i < size)
 	{
-		if ((*ps->b_stack)->val != ps->min)
-			pb(ps);
-		else
-			ra(ps);
+		if (tmp->val < min)
+			min = tmp->val;
+		tmp = tmp->next;
 	}
-	sort_3(ps, ps->max);
-	if ((*ps->b_stack)->val > (*ps->b_stack)->next->val)
-		sb(ps);
-	while (ps->size_b > 0)
-	{
-		if ((*ps->b_stack)->val > (*ps->a_stack)->val)
-			pa(ps);
-		else
-			ra(ps);
-	}
-	while ((*ps->a_stack)->val != ps->min)
-		ra(ps);
+	return (min);
 }

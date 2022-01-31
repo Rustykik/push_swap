@@ -6,11 +6,39 @@
 /*   By: rusty <rusty@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/23 06:43:23 by rusty             #+#    #+#             */
-/*   Updated: 2022/01/30 06:25:07 by rusty            ###   ########.fr       */
+/*   Updated: 2022/01/31 14:10:56 by rusty            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+static int	is_less_maxint(const char *str)
+{
+	long long	ret;
+	int			sig;
+
+	ret = 0;
+	sig = 1;
+	while (*str == ' ' || *str == '\n' || *str == '\t' || *str == '\v'\
+	|| *str == '\f' || *str == '\r')
+		++str;
+	if (*str == '+' || *str == '-')
+	{
+		if (*str == '-')
+			sig *= -1;
+		++str;
+	}
+	while (*str >= '0' && *str <= '9')
+	{
+		ret = 10 * ret + *str - 48;
+		if (ret > 2147483647 && sig == 1)
+			return (0);
+		if (ret > 2147483648 && sig == -1)
+			return (0);
+		++str;
+	}
+	return (1);
+}
 
 static	int	str_is_digit(char *str)
 {
@@ -61,7 +89,7 @@ static void	check_first(char *input)
 	i = -1;
 	while (args[++i])
 	{
-		if (!str_is_digit(args[i]))
+		if (!str_is_digit(args[i]) || !is_less_maxint(args[i]))
 		{
 			free_split(args);
 			error_wrong_args();
@@ -87,7 +115,7 @@ int	check_input(int argc, char **argv)
 	{
 		while (argv[++i])
 		{
-			if (!str_is_digit(argv[i]))
+			if (!str_is_digit(argv[i]) || !is_less_maxint(argv[i]))
 				error_wrong_args();
 		}
 		check_duplicate(argv, 0);

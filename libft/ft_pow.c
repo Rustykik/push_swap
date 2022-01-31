@@ -1,32 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_pow.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rusty <rusty@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ubeetroo <ubeetroo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/23 06:43:23 by rusty             #+#    #+#             */
-/*   Updated: 2022/01/31 13:35:01 by rusty            ###   ########.fr       */
+/*   Created: 2021/11/25 21:50:04 by ubeetroo          #+#    #+#             */
+/*   Updated: 2021/11/25 21:59:29 by ubeetroo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
-
-void	solve(t_ps *ps)
+int	ft_pow(int nb, int power)
 {
-	if (check_sorted(*ps->a_stack, ps->size_a))
-		return ;
-	sort(ps);
-}
-
-int	main(int argc, char **argv)
-{
-	t_ps	*ps;
-
-	if (argc < 2)
+	if (power < 0)
+		return (0);
+	if (power == 0)
 		return (1);
-	check_input(argc, argv);
-	ps = input_ps(argc, argv);
-	solve(ps);
-	free_ps(ps);
+	return (nb * ft_pow(nb, power - 1));
 }

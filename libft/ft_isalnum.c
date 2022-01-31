@@ -1,32 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_isalnum.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rusty <rusty@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ubeetroo <ubeetroo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/23 06:43:23 by rusty             #+#    #+#             */
-/*   Updated: 2022/01/31 13:35:01 by rusty            ###   ########.fr       */
+/*   Created: 2021/10/04 13:09:31 by ubeetroo          #+#    #+#             */
+/*   Updated: 2021/10/10 20:40:15 by ubeetroo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-void	solve(t_ps *ps)
+int	ft_isalnum(int a)
 {
-	if (check_sorted(*ps->a_stack, ps->size_a))
-		return ;
-	sort(ps);
-}
-
-int	main(int argc, char **argv)
-{
-	t_ps	*ps;
-
-	if (argc < 2)
+	if (ft_isdigit(a) || ft_isalpha(a))
 		return (1);
-	check_input(argc, argv);
-	ps = input_ps(argc, argv);
-	solve(ps);
-	free_ps(ps);
+	else
+		return (0);
 }

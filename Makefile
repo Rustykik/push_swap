@@ -6,11 +6,13 @@
 #    By: rusty <rusty@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/04 12:56:00 by ubeetroo          #+#    #+#              #
-#    Updated: 2022/01/30 10:35:20 by rusty            ###   ########.fr        #
+#    Updated: 2022/01/31 14:28:41 by rusty            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = push_swap
+
+NAME_B = checker
 
 COMP = gcc
 
@@ -38,7 +40,25 @@ PS_SRCS =  ft_clist_add_back \
 	actions3 \
 	exec \
 	main 
-			
+
+PS_SRCS_B = ft_clist_add_back \
+	ft_clistdellone \
+	ft_clstclear \
+	ft_clist_add_front \
+	ft_clistnew \
+	errors \
+	check_input \
+	input \
+	input_utils \
+	utils \
+	solve \
+	solve_utils \
+	find \
+	actions_bonus \
+	actions2_bonus \
+	actions3_bonus \
+	exec \
+	checker_bonus		
 
 # PS_OBJ_FOLDER = ./obj/
 
@@ -58,6 +78,9 @@ PS_SRCS =  ft_clist_add_back \
 PS_SRC =  $(addsuffix .c, $(PS_SRCS))
 PS_OBJ =  $(addsuffix .o, $(PS_SRCS))
 
+PS_SRC_B =  $(addsuffix .c, $(PS_SRCS_B))
+PS_OBJ_B =  $(addsuffix .o, $(PS_SRCS_B))
+
 # SRC_B =  $(addsuffix .c, $(SRCS_B))
 # PS_OBJ_B =  $(addsuffix .o, $(SRCS_B))
 
@@ -65,6 +88,8 @@ PS_OBJ =  $(addsuffix .o, $(PS_SRCS))
 $(NAME): $(LIBFT) $(PS_OBJ) 
 	$(COMP) $(FLAGS) $(PS_OBJ) $(LIBFT) -o $@
 
+$(NAME_B): $(LIBFT) $(PS_OBJ_B) 
+	$(COMP) $(FLAGS) $(PS_OBJ_B) $(LIBFT) -o $@
 # bonus: $(PS_OBJ) $(PS_OBJ_B) 
 # 	ar rcs $(NAME) $(PS_OBJ) $(PS_OBJ_B)
 
@@ -73,18 +98,20 @@ $(NAME): $(LIBFT) $(PS_OBJ)
 
 all: $(NAME) $(PS_INC) Makefile
 
+bonus: $(NAME_B) $(PS_INC) Makefile
+
 clean: 
-	rm -f $(PS_OBJ) 
+	rm -f $(PS_OBJ) $(PS_OBJ_B)
 	make -C $(PATH_LIBFT) clean
 
 $(LIBFT):
 	make -C $(PATH_LIBFT)
 
 fclean: clean
-	rm -f $(NAME)
+	rm -f $(NAME) $(NAME_B)
 	make -C $(PATH_LIBFT) fclean
 
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re bonus

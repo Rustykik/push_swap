@@ -1,32 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_isalpha.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rusty <rusty@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ubeetroo <ubeetroo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/23 06:43:23 by rusty             #+#    #+#             */
-/*   Updated: 2022/01/31 13:35:01 by rusty            ###   ########.fr       */
+/*   Created: 2021/10/04 12:42:22 by ubeetroo          #+#    #+#             */
+/*   Updated: 2021/10/10 20:40:16 by ubeetroo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-void	solve(t_ps *ps)
+int	ft_isalpha(int a)
 {
-	if (check_sorted(*ps->a_stack, ps->size_a))
-		return ;
-	sort(ps);
-}
-
-int	main(int argc, char **argv)
-{
-	t_ps	*ps;
-
-	if (argc < 2)
+	if ((a >= 65 && a <= 90) || (a >= 97 && a <= 122))
 		return (1);
-	check_input(argc, argv);
-	ps = input_ps(argc, argv);
-	solve(ps);
-	free_ps(ps);
+	else
+		return (0);
 }
